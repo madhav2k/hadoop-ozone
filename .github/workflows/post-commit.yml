@@ -104,7 +104,10 @@ jobs:
           git checkout ${GITHUB_SHA}
           git reset --hard
       - run: sudo pip install robotframework
-      - run: cd /mnt/ozone && hadoop-ozone/dev-support/checks/acceptance.sh
+      - run: |
+          cd /mnt/ozone
+          mkdir .aws && sudo chown 1000 .aws
+          hadoop-ozone/dev-support/checks/acceptance.sh
         env:
           KEEP_IMAGE: false
       - uses: actions/upload-artifact@master
