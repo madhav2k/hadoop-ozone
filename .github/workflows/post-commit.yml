@@ -106,7 +106,7 @@ jobs:
       - run: sudo pip install robotframework
       - run: |
           cd /mnt/ozone
-          mkdir .aws && sudo chown 1000 .aws
+          sudo mkdir .aws && sudo chmod 777 .aws && sudo chown 1000 .aws
           hadoop-ozone/dev-support/checks/acceptance.sh
         env:
           KEEP_IMAGE: false
