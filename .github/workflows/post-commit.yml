@@ -24,6 +24,8 @@ jobs:
         with:
           path: ~/.m2/repository
           key: maven-repo-${{ hashFiles('**/pom.xml') }}
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v2
       - run: |
           sudo chmod 777 /mnt
           git clone https://github.com/${GITHUB_REPOSITORY}.git /mnt/ozone
