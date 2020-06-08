@@ -33,15 +33,20 @@ jobs:
             tmate -S /tmp/tmate.sock wait tmate-ready
             tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}'
             tmate -S /tmp/tmate.sock display -p '#{tmate_web}'
-      - run: |
+      - name: checkout to /mnt/ozone
+        run: |
           sudo chmod 777 /mnt
           git clone https://github.com/${GITHUB_REPOSITORY}.git /mnt/ozone
           cd /mnt/ozone
           git checkout ${GITHUB_SHA}
           git reset --hard
+      - name: run a full build
+        run:
+          cd /mnt/ozone
+          hadoop-ozone/dev-support/checks/build.sh -Pjacoco
       - run: sudo pip install robotframework
       - run: |
-          cd /mnt/ozone
+          cd /mnt/ozone/hadoop-ozone/dist/target/ozone-*
           sudo mkdir .aws && sudo chmod 777 .aws && sudo chown 1000 .aws
           hadoop-ozone/dev-support/checks/acceptance.sh
         env:
