@@ -41,7 +41,7 @@ jobs:
           git checkout ${GITHUB_SHA}
           git reset --hard
       - name: run a full build
-        run:
+        run: |
           cd /mnt/ozone
           hadoop-ozone/dev-support/checks/build.sh -Pjacoco
       - run: sudo pip install robotframework
