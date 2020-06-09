@@ -35,7 +35,6 @@ cd "$DIST_DIR/compose" || exit 1
 RES=$?
 cp result/* "$REPORT_DIR/"
 cp "$REPORT_DIR/log.html" "$REPORT_DIR/summary.html"
-set -x
 
 EXEC_FILES=$(find "$REPORT_DIR" -name "*.jacoco.exec" | wc -l)
 if [[ $EXEC_FILES -gt 1 ]]; then
