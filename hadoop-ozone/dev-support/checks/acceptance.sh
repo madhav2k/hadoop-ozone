@@ -38,7 +38,7 @@ cp "$REPORT_DIR/log.html" "$REPORT_DIR/summary.html"
 
 EXEC_FILES=$(find "$REPORT_DIR" -name "*.jacoco.exec" | wc -l)
 if [[ $EXEC_FILES -gt 1 ]]; then
-  java -jar "$DIST_DIR/share/jacoco/jacoco-cli.jar" merge $(find "$REPORT_DIR" -name "*.jacoco.exec") --destdir "$REPORT_DIR/jacoco-combined.exec"
+  java -jar "$DIST_DIR/share/jacoco/jacoco-cli.jar" merge $(find "$REPORT_DIR" -name "*.jacoco.exec") --destfile "$REPORT_DIR/jacoco-combined.exec"
 fi
 
 if [[ $EXEC_FILES == 1 ]]; then
