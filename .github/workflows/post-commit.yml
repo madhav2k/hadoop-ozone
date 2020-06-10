@@ -242,6 +242,7 @@ jobs:
        - it-filesystem-contract
        - it-filesystem
        - it-freon
+       - acceptance
        - unit
     steps:
        - uses: actions/checkout@v2
