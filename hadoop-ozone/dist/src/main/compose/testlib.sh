@@ -194,7 +194,7 @@ wait_for_port(){
 ## @description  Stops a docker-compose based test environment (with saving the logs)
 stop_docker_env(){
   docker-compose -f "$COMPOSE_FILE" --no-ansi ps -q | while read CONTAINER ; do
-    docker cp "$CONTAINER:/tmp/jacoco.exec" "$RESULT_DIR/docker-$OUTPUT_NAME.$RANDOM.jacoco.exec"
+    docker cp "$CONTAINER:/tmp/jacoco.exec" "$RESULT_DIR/docker-$OUTPUT_NAME.$RANDOM.jacoco.exec" || true
   done
   docker-compose -f "$COMPOSE_FILE" --no-ansi logs > "$RESULT_DIR/docker-$OUTPUT_NAME.log"
   if [ "${KEEP_RUNNING:-false}" = false ]; then
