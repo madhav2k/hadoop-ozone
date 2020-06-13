@@ -110,7 +110,6 @@ execute_robot_test(){
   FULL_CONTAINER_NAME=$(docker-compose -f "$COMPOSE_FILE" ps | grep "_${CONTAINER}_" | head -n 1 | awk '{print $1}')
 
   docker cp "$FULL_CONTAINER_NAME:$OUTPUT_PATH" "$RESULT_DIR/"
-  docker cp "$FULL_CONTAINER_NAME:/tmp/jacoco.exec" "$RESULT_DIR/$OUTPUT_NAME.$RANDOM.jacoco.exec" || true
 
   copy_daemon_logs
 
@@ -193,9 +192,6 @@ wait_for_port(){
 
 ## @description  Stops a docker-compose based test environment (with saving the logs)
 stop_docker_env(){
-  docker-compose -f "$COMPOSE_FILE" --no-ansi ps -q | while read CONTAINER ; do
-    docker cp "$CONTAINER:/tmp/jacoco.exec" "$RESULT_DIR/docker-$OUTPUT_NAME.$RANDOM.jacoco.exec" || true
-  done
   docker-compose -f "$COMPOSE_FILE" --no-ansi logs > "$RESULT_DIR/docker-$OUTPUT_NAME.log"
   if [ "${KEEP_RUNNING:-false}" = false ]; then
      docker-compose -f "$COMPOSE_FILE" --no-ansi down

@@ -382,7 +382,8 @@
     </profile>
 
     <profile>
-      <id>jacoco</id>
+      <!-- turn on the profile to copy all the required jar files to measure coverage -->
+      <id>coverage</id>
       <build>
         <plugins>
           <plugin>
@@ -398,7 +399,7 @@
                 </goals>
                 <configuration>
                   <outputDirectory>
-                    target/ozone-${ozone.version}/share/jacoco
+                    target/ozone-${ozone.version}/share/coverage
                   </outputDirectory>
                   <artifactItems>
                     <artifactItem>
@@ -415,7 +416,17 @@
                       <classifier>nodeps</classifier>
                       <destFileName>jacoco-cli.jar</destFileName>
                     </artifactItem>
-                  </artifactItems>
+                    <artifactItem>
+                      <groupId>org.jacoco</groupId>
+                      <artifactId>org.jacoco.core</artifactId>
+                      <version>0.8.5</version>
+                      <destFileName>jacoco-core.jar</destFileName>
+                    </artifactItem>
+                    <artifactItem>
+                      <groupId>org.apache.hadoop</groupId>
+                      <artifactId>hadoop-hdds-test-utils</artifactId>
+                     </artifactItem>
+                    </artifactItems>
                 </configuration>
               </execution>
             </executions>

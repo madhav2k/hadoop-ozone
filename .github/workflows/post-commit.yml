@@ -107,13 +107,14 @@ jobs:
       - name: run a full build
         run: |
           cd /mnt/ozone
-          hadoop-ozone/dev-support/checks/build.sh -Pjacoco
+          hadoop-ozone/dev-support/checks/build.sh -Pcoverage
       - run: sudo pip install robotframework
       - run: |
           cd /mnt/ozone/hadoop-ozone/dist/target/ozone-* && sudo mkdir .aws && sudo chmod 777 .aws && sudo chown 1000 .aws
           cd /mnt/ozone && hadoop-ozone/dev-support/checks/acceptance.sh
         env:
           KEEP_IMAGE: false
+          OZONE_WITH_COVERAGE: true
       - uses: actions/upload-artifact@master
         if: always()
         with:
